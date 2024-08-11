@@ -4,7 +4,7 @@ import logger from './logger'
 require('dotenv').config()
 
 async function connect() {
-	const dbUri: string | undefined = process.env.DBURI
+	const dbUri = process.env.DBURI
 
 	if (!dbUri) {
 		logger.error('DBURI environment variable is not set')

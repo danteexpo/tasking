@@ -16,7 +16,7 @@ export async function createUser(
 		throw new Error(e)
 	}
 }
-/*
+
 export async function validatePassword({
 	email,
 	password,
@@ -40,4 +40,3 @@ export async function validatePassword({
 export async function findUser(query: FilterQuery<UserDocument>) {
 	return UserModel.findOne(query).lean()
 }
-*/
