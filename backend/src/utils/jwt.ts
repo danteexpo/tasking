@@ -29,12 +29,16 @@ export function signJwt(
 
 export function verifyJwt(
 	token: string,
-	keyName: 'accessTokenPublicKey' | 'refreshTokenPublicKey'
+	// keyName: 'accessTokenPublicKey' | 'refreshTokenPublicKey'
 ) {
 	const public_key = process.env.PUBLIC_KEY
 
 	if (!public_key) {
-		return
+		return {
+			valid: false,
+			expired: false,
+			decoded: null,
+		}
 	}
 
 	/*

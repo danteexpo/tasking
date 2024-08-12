@@ -1,10 +1,8 @@
 import { Request, Response } from 'express'
 import { validatePassword } from '../services/user.service'
-import { createSession } from '../services/session.service'
+import { createSession, findSessions, updateSession } from '../services/session.service'
 import { UserDocument } from '../models/user.model'
 import { signJwt } from '../utils/jwt'
-// import { CreateUserInput } from '../schemas/user.schema'
-// import logger from '../utils/logger'
 
 require('dotenv').config()
 
@@ -13,9 +11,15 @@ export async function createUserSessionHandler(
 	res: Response
 ) {
 	const accessTokenTtl = process.env.ACCESSTOKENTTL
+	const refreshTokenTtl = process.env.REFRESHTOKENTTL
 
 	if (!accessTokenTtl) {
 		console.error('ACCESSTOKENTTL environment variable is not set')
+		return
+	}
+
+	if (!refreshTokenTtl) {
+		console.error('REFRESHTOKENTTL environment variable is not set')
 		return
 	}
 
@@ -40,9 +44,28 @@ export async function createUserSessionHandler(
 	const refreshToken = signJwt({
 		...user, session: session._id
 	},
-		{ expiresIn: accessTokenTtl }
+		{ expiresIn: refreshTokenTtl }
 	)
 
 	// Returning access & refresh tokens
 	return res.send({ accessToken, refreshToken })
+}
+
+export async function getUserSessionsHandler(req: Request, res: Response) {
+	const userId = res.locals.user._id
+
+	const sessions = await findSessions({ user: userId, valid: true })
+
+	return res.send(sessions)
+}
+
+export async function deleteSessionHandler(req: Request, res: Response) {
+	const sessionId = res.locals.user.session
+
+	await updateSession({ _id: sessionId }, { valid: false })
+
+	return res.send({
+		accessToken: null,
+		refreshToken: null
+	})
 }
