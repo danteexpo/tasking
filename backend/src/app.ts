@@ -3,8 +3,9 @@ import routes from './routes'
 import connect from './utils/connect'
 import logger from './utils/logger'
 import deserializeUser from './middleware/deserializeUser'
+import { config } from 'dotenv'
 
-require('dotenv').config()
+config()
 
 const port = process.env.PORT
 

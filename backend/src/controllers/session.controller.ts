@@ -3,8 +3,9 @@ import { validatePassword } from '../services/user.service'
 import { createSession, findSessions, updateSession } from '../services/session.service'
 import { UserDocument } from '../models/user.model'
 import { signJwt } from '../utils/jwt'
+import { config } from 'dotenv'
 
-require('dotenv').config()
+config()
 
 export async function createUserSessionHandler(
 	req: Request,

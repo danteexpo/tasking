@@ -1,8 +1,5 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
 import { UserDocument } from './user.model'
-
-require('dotenv').config()
 
 export interface SessionDocument extends mongoose.Document {
 	user: UserDocument["_id"];

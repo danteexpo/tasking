@@ -3,8 +3,9 @@ import SessionModel, { SessionDocument } from '../models/session.model'
 import { signJwt, verifyJwt } from "../utils/jwt"
 import { findUser } from "./user.service"
 import { get } from "lodash"
+import { config } from 'dotenv'
 
-require("dotenv").config()
+config()
 
 export async function createSession(userId: string, userAgent: string) {
 	const session = await SessionModel.create({ user: userId, userAgent })

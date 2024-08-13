@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
+import { config } from 'dotenv'
 
-require('dotenv').config()
+config()
 
 export function signJwt(
 	object: Object,

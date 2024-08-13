@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
 import logger from './logger'
+import { config } from 'dotenv'
 
-require('dotenv').config()
+config()
 
 async function connect() {
 	const dbUri = process.env.DBURI
