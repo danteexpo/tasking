@@ -31,6 +31,10 @@ export async function reIssueAccessToken({
 }) {
 	const accessTokenTtl = process.env.ACCESSTOKENTTL
 
+	if (!accessTokenTtl) {
+		throw new Error('ACCESSTOKENTTL environment variable is not set')
+	}
+
 	const { decoded } = verifyJwt(refreshToken);
 
 	if (!decoded || !get(decoded, "session")) return false;

@@ -21,7 +21,7 @@ function routes(app: Express) {
 
 	app.post('/api/tasks', [requireUser, validateResource(createTaskSchema)], createTaskHandler)
 
-	app.get('/api/tasks/:taskId', validateResource(getTaskSchema), getTaskHandler)
+	app.get('/api/tasks/:taskId', [requireUser, validateResource(getTaskSchema)], getTaskHandler)
 
 	app.put('/api/tasks/:taskId', [requireUser, validateResource(updateTaskSchema)], updateTaskHandler)
 
