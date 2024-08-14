@@ -1,12 +1,12 @@
 import { Express, Request, Response } from 'express'
-import { createUserHandler } from './controllers/user.controller'
-import { createTaskHandler, deleteTaskHandler, getTaskHandler, updateTaskHandler } from './controllers/task.controller'
-import { createUserSessionHandler, getUserSessionsHandler, deleteSessionHandler } from './controllers/session.controller'
 import validateResource from './middleware/validateResource'
 import requireUser from './middleware/requireUser'
+import { createUserHandler } from './controllers/user.controller'
 import { createUserSchema } from './schemas/user.schema'
+import { createUserSessionHandler, getUserSessionsHandler, deleteSessionHandler } from './controllers/session.controller'
 import { createSessionSchema } from './schemas/session.schema'
-import { createTaskSchema, deleteTaskSchema, getTaskSchema, updateTaskSchema } from './schemas/task.schema'
+import { createTaskHandler, getTaskHandler, updateTaskHandler, deleteTaskHandler } from './controllers/task.controller'
+import { createTaskSchema, getTaskSchema, updateTaskSchema, deleteTaskSchema } from './schemas/task.schema'
 
 function routes(app: Express) {
 	app.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200))

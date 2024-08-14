@@ -8,16 +8,15 @@ async function connect() {
 	const dbUri = process.env.DBURI
 
 	if (!dbUri) {
-		logger.error('DBURI environment variable is not set')
-		process.exit(1)
+		throw new Error('DBURI environment variable is not set')
 	}
 
 	try {
 		await mongoose.connect(dbUri)
 		logger.info('Connected to db')
 	}
-	catch {
-		logger.error('Could not connect to db')
+	catch (error) {
+		logger.error('Could not connect to db', error)
 		process.exit(1)
 	}
 }
