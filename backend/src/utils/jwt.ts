@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import logger from './logger'
 import { config } from 'dotenv'
 
 config()
@@ -31,7 +32,7 @@ export function verifyJwt(token: string) {
             decoded,
         }
     } catch (e: any) {
-        console.error(e)
+        logger.error(e)
         return {
             valid: false,
             expired: e.message === 'jwt expired',
