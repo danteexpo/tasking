@@ -1,44 +1,44 @@
-import { optional, object, date, string, TypeOf } from "zod";
+import { optional, object, date, string, TypeOf } from 'zod'
 
 const payload = {
-	body: object({
-		title: string({
-			required_error: "Title is required",
-		}),
-		description: optional(string()),
-		category: optional(string()),
-		priority: optional(string()),
-		status: optional(string()),
-		dueAt: optional(date()),
-	}),
-};
+    body: object({
+        title: string({
+            required_error: 'Title is required',
+        }),
+        description: optional(string()),
+        category: optional(string()),
+        priority: optional(string()),
+        status: optional(string()),
+        dueAt: optional(date()),
+    }),
+}
 
 const params = {
-	params: object({
-		taskId: string({
-			required_error: "taskId is required",
-		}),
-	}),
-};
+    params: object({
+        taskId: string({
+            required_error: 'taskId is required',
+        }),
+    }),
+}
 
 export const createTaskSchema = object({
-	...payload,
-});
+    ...payload,
+})
 
 export const updateTaskSchema = object({
-	...payload,
-	...params,
-});
+    ...payload,
+    ...params,
+})
 
 export const deleteTaskSchema = object({
-	...params,
-});
+    ...params,
+})
 
 export const getTaskSchema = object({
-	...params,
-});
+    ...params,
+})
 
-export type CreateTaskInput = TypeOf<typeof createTaskSchema>;
-export type UpdateTaskInput = TypeOf<typeof updateTaskSchema>;
-export type ReadTaskInput = TypeOf<typeof getTaskSchema>;
-export type DeleteTaskInput = TypeOf<typeof deleteTaskSchema>;
+export type CreateTaskInput = TypeOf<typeof createTaskSchema>
+export type UpdateTaskInput = TypeOf<typeof updateTaskSchema>
+export type ReadTaskInput = TypeOf<typeof getTaskSchema>
+export type DeleteTaskInput = TypeOf<typeof deleteTaskSchema>
