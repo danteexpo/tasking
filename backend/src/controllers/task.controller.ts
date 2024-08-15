@@ -38,10 +38,10 @@ export async function updateTaskHandler(
     try {
         const userId = res.locals.user._id
 
-        const taskId = req.params.taskId
+        const _id = req.params._id
         const update = req.body
 
-        const task = await findTask({ taskId })
+        const task = await findTask({ _id })
 
         if (!task) {
             return res.sendStatus(404)
@@ -51,7 +51,7 @@ export async function updateTaskHandler(
             return res.sendStatus(403)
         }
 
-        const updatedTask = await findAndUpdateTask({ taskId }, update, {
+        const updatedTask = await findAndUpdateTask({ _id }, update, {
             new: true,
         })
 
@@ -67,8 +67,8 @@ export async function getTaskHandler(
     res: Response
 ) {
     try {
-        const taskId = req.params.taskId
-        const task = await findTask({ taskId })
+        const _id = req.params._id
+        const task = await findTask({ _id })
 
         if (!task) {
             return res.sendStatus(404)
@@ -87,9 +87,9 @@ export async function deleteTaskHandler(
 ) {
     try {
         const userId = res.locals.user._id
-        const taskId = req.params.taskId
+        const _id = req.params._id
 
-        const task = await findTask({ taskId })
+        const task = await findTask({ _id })
 
         if (!task) {
             return res.sendStatus(404)
@@ -99,7 +99,7 @@ export async function deleteTaskHandler(
             return res.sendStatus(403)
         }
 
-        await deleteTask({ taskId })
+        await deleteTask({ _id })
 
         return res.sendStatus(200)
     } catch (error) {

@@ -50,19 +50,19 @@ function routes(app: Express) {
     )
 
     app.get(
-        '/api/tasks/:taskId',
+        '/api/tasks/:_id',
         [requireUser, validateResource(getTaskSchema)],
         getTaskHandler
     )
 
     app.put(
-        '/api/tasks/:taskId',
+        '/api/tasks/:_id',
         [requireUser, validateResource(updateTaskSchema)],
         updateTaskHandler
     )
 
     app.delete(
-        '/api/tasks/:taskId',
+        '/api/tasks/:_id',
         [requireUser, validateResource(deleteTaskSchema)],
         deleteTaskHandler
     )

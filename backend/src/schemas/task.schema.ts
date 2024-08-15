@@ -15,8 +15,8 @@ const payload = {
 
 const params = {
     params: object({
-        taskId: string({
-            required_error: 'taskId is required',
+        _id: string({
+            required_error: '_id is required',
         }),
     }),
 }
