@@ -23,44 +23,43 @@ import {
 } from './schemas/task.schema'
 
 function routes(app: Express) {
+    // Health check
     app.get('/healthcheck', (req: Request, res: Response) =>
         res.sendStatus(200)
     )
 
+    // User routes
     app.post(
         '/api/users',
         validateResource(createUserSchema),
         createUserHandler
     )
 
+    // Sessions routes
     app.post(
         '/api/sessions',
         validateResource(createSessionSchema),
         createUserSessionHandler
     )
-
     app.get('/api/sessions', requireUser, getUserSessionsHandler)
-
     app.delete('/api/sessions', requireUser, deleteSessionHandler)
 
+    // Task routes
     app.post(
         '/api/tasks',
         [requireUser, validateResource(createTaskSchema)],
         createTaskHandler
     )
-
     app.get(
         '/api/tasks/:_id',
         [requireUser, validateResource(getTaskSchema)],
         getTaskHandler
     )
-
     app.put(
         '/api/tasks/:_id',
         [requireUser, validateResource(updateTaskSchema)],
         updateTaskHandler
     )
-
     app.delete(
         '/api/tasks/:_id',
         [requireUser, validateResource(deleteTaskSchema)],

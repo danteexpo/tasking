@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import routes from './routes'
 import connect from './utils/connect'
 import logger from './utils/logger'
@@ -16,6 +17,8 @@ if (!port) {
 const app = express()
 
 app.use(express.json())
+
+app.use(cors())
 
 app.use(deserializeUser)
 

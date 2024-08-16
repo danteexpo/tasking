@@ -8,10 +8,10 @@ const deserializeUser = async (
     res: Response,
     next: NextFunction
 ) => {
-    const accessToken = get(req, 'headers.authorization', '').replace(
-        /^Bearer\s/,
-        ''
-    )
+    const authorizationHeader = get(req, 'headers.authorization') || ''
+    const accessToken = authorizationHeader.startsWith('Bearer ')
+        ? authorizationHeader.slice(7).trim()
+        : null
 
     const refreshToken = get(req, 'headers.x-refresh') as string
 
