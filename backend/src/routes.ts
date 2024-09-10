@@ -1,7 +1,10 @@
 import { Express, Request, Response } from 'express'
 import validateResource from './middleware/validateResource'
 import requireUser from './middleware/requireUser'
-import { createUserHandler } from './controllers/user.controller'
+import {
+    createUserHandler,
+    getCurrentUser,
+} from './controllers/user.controller'
 import { createUserSchema } from './schemas/user.schema'
 import {
     createUserSessionHandler,
@@ -34,6 +37,7 @@ function routes(app: Express) {
         validateResource(createUserSchema),
         createUserHandler
     )
+    app.get('/api/me', requireUser, getCurrentUser)
 
     // Sessions routes
     app.post(

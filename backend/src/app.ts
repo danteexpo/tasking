@@ -5,6 +5,7 @@ import connect from './utils/connect'
 import logger from './utils/logger'
 import deserializeUser from './middleware/deserializeUser'
 import { config } from 'dotenv'
+import cookieParser from 'cookie-parser'
 
 config()
 
@@ -15,6 +16,8 @@ if (!port) {
 }
 
 const app = express()
+
+app.use(cookieParser())
 
 app.use(express.json())
 
